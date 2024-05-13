@@ -4,8 +4,9 @@ Date: Nov 2019
 """
 import argparse
 import os
-from data_utils.S3DISDataLoader import S3DISDataset
+from data_utils.S3DISDataLoader import RhobanDataset
 import torch
+from torch import nn
 import datetime
 import logging
 from pathlib import Path
@@ -21,8 +22,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'models'))
 
-classes = ['ceiling', 'floor', 'wall', 'beam', 'column', 'window', 'door', 'table', 'chair', 'sofa', 'bookcase',
-           'board', 'clutter']
+classes = ['background', 'robot']
 class2label = {cls: i for i, cls in enumerate(classes)}
 seg_classes = class2label
 seg_label_to_cat = {}
@@ -75,7 +75,6 @@ def main(args):
     checkpoints_dir.mkdir(exist_ok=True)
     log_dir = experiment_dir.joinpath('logs/')
     log_dir.mkdir(exist_ok=True)
-
     '''LOG'''
     args = parse_args()
     logger = logging.getLogger("Model")
@@ -89,14 +88,14 @@ def main(args):
     log_string(args)
 
     root = 'data/stanford_indoor3d/'
-    NUM_CLASSES = 13
+    NUM_CLASSES = 2
     NUM_POINT = args.npoint
     BATCH_SIZE = args.batch_size
 
     print("start loading training data ...")
-    TRAIN_DATASET = S3DISDataset(split='train', data_root=root, num_point=NUM_POINT, test_area=args.test_area, block_size=1.0, sample_rate=1.0, transform=None)
+    TRAIN_DATASET = RhobanDataset(data_root='/home/starkit/Pointnet_Pointnet2_pytorch/data/ds0/labels', split='train', num_point=NUM_POINT, block_size=1.0, sample_rate=1.0, transform=None)
     print("start loading test data ...")
-    TEST_DATASET = S3DISDataset(split='test', data_root=root, num_point=NUM_POINT, test_area=args.test_area, block_size=1.0, sample_rate=1.0, transform=None)
+    TEST_DATASET = RhobanDataset(data_root='/home/starkit/Pointnet_Pointnet2_pytorch/data/ds0/labels', split='test', num_point=NUM_POINT, block_size=1.0, sample_rate=1.0, transform=None)
 
     trainDataLoader = torch.utils.data.DataLoader(TRAIN_DATASET, batch_size=BATCH_SIZE, shuffle=True, num_workers=10,
                                                   pin_memory=True, drop_last=True,
@@ -108,14 +107,20 @@ def main(args):
     log_string("The number of training data is: %d" % len(TRAIN_DATASET))
     log_string("The number of test data is: %d" % len(TEST_DATASET))
 
+
     '''MODEL LOADING'''
     MODEL = importlib.import_module(args.model)
     shutil.copy('models/%s.py' % args.model, str(experiment_dir))
     shutil.copy('models/pointnet2_utils.py', str(experiment_dir))
 
-    classifier = MODEL.get_model(NUM_CLASSES).cuda()
+    classifier: nn.Module = MODEL.get_model(NUM_CLASSES).cuda()
     criterion = MODEL.get_loss().cuda()
     classifier.apply(inplace_relu)
+
+    # names = ['conv1.weight', 'conv1.bias', 'conv2.weight', 'conv2.bias', 'bn1.weight', 'bn1.bias', 'fp1.mlp_convs.0.bias', 'fp1.mlp_convs.0.weight','fp1.mlp_convs.1.bias', 'fp1.mlp_convs.1.weight', 'fp1.mlp_convs.2.bias', 'fp1.mlp_convs.2.weight', 'fp1.mlp_bns.0.bias', 'fp1.mlp_bns.0.weight', 'fp1.mlp_bns.1.bias', 'fp1.mlp_bns.1.weight','fp1.mlp_bns.2.bias', 'fp1.mlp_bns.2.weight']
+    # for param in classifier.named_parameters():
+    #     if param[0] not in names:
+    #         param[1].requires_grad = False
 
     def weights_init(m):
         classname = m.__class__.__name__
@@ -127,11 +132,14 @@ def main(args):
             torch.nn.init.constant_(m.bias.data, 0.0)
 
     try:
-        checkpoint = torch.load(str(experiment_dir) + '/checkpoints/best_model.pth')
+        checkpoint = torch.load('/home/starkit/Pointnet_Pointnet2_pytorch/log/sem_seg/pointnet2_sem_seg/checkpoints/best_model.pth')
         start_epoch = checkpoint['epoch']
-        classifier.load_state_dict(checkpoint['model_state_dict'])
+        current_model_dict = checkpoint['model_state_dict']
+        new_state_dict={k:v for k, v in current_model_dict.items() if k not in ['conv2.weight', 'conv2.bias']}
+        classifier.load_state_dict(new_state_dict, strict=False)
         log_string('Use pretrain model')
-    except:
+    except Exception as e:
+        print(e)
         log_string('No existing model, starting training from scratch...')
         start_epoch = 0
         classifier = classifier.apply(weights_init)

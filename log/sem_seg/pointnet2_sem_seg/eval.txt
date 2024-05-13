@@ -88,3 +88,28 @@ class clutter       , IoU: 0.416
 2021-03-23 22:45:35,271 - Model - INFO - eval point avg class IoU: 0.535313
 2021-03-23 22:45:35,271 - Model - INFO - eval whole scene point avg class acc: 0.620289
 2021-03-23 22:45:35,271 - Model - INFO - eval whole scene point accuracy: 0.829893
+2024-04-27 19:24:32,137 - Model - INFO - PARAMETER ...
+2024-04-27 19:24:32,137 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='pointnet2_sem_seg', num_point=4096, num_votes=3, test_area=6, visual=True)
+2024-04-27 19:25:26,786 - Model - INFO - PARAMETER ...
+2024-04-27 19:25:26,786 - Model - INFO - Namespace(batch_size=32, gpu='0', log_dir='pointnet2_sem_seg', num_point=4096, num_votes=3, test_area=6, visual=True)
+2024-04-27 19:25:32,073 - Model - INFO - The number of test data is: 48
+2024-04-27 19:25:36,225 - Model - INFO - ---- EVALUATION WHOLE SCENE----
+2024-04-27 19:28:13,946 - Model - INFO - PARAMETER ...
+2024-04-27 19:28:13,946 - Model - INFO - Namespace(batch_size=16, gpu='0', log_dir='pointnet2_sem_seg', num_point=4096, num_votes=3, test_area=6, visual=True)
+2024-04-27 19:28:19,051 - Model - INFO - The number of test data is: 48
+2024-04-27 19:28:21,729 - Model - INFO - ---- EVALUATION WHOLE SCENE----
+2024-04-27 19:28:48,068 - Model - INFO - Mean IoU of Area_6_hallway_3: 0.8670
+2024-04-27 19:29:51,627 - Model - INFO - Mean IoU of Area_6_office_35: 0.8636
+2024-04-27 19:30:58,283 - Model - INFO - Mean IoU of Area_6_office_7: 0.7885
+2024-04-27 19:32:05,526 - Model - INFO - Mean IoU of Area_6_office_29: 0.8643
+2024-04-27 19:32:50,067 - Model - INFO - Mean IoU of Area_6_office_20: 0.8976
+2024-04-27 19:33:33,947 - Model - INFO - Mean IoU of Area_6_copyRoom_1: 0.8786
+2024-04-27 19:37:45,762 - Model - INFO - Mean IoU of Area_6_openspace_1: 0.9138
+2024-04-27 19:38:29,353 - Model - INFO - Mean IoU of Area_6_office_22: 0.7979
+2024-04-27 19:39:10,977 - Model - INFO - Mean IoU of Area_6_office_14: 0.9106
+2024-04-27 19:39:54,994 - Model - INFO - Mean IoU of Area_6_office_18: 0.9076
+2024-04-27 19:42:11,976 - Model - INFO - Mean IoU of Area_6_lounge_1: 0.9280
+2024-04-27 22:25:56,132 - Model - INFO - PARAMETER ...
+2024-04-27 22:25:56,132 - Model - INFO - Namespace(batch_size=16, gpu='0', log_dir='pointnet2_sem_seg', num_point=4096, num_votes=3, test_area=6, visual=True)
+2024-04-27 22:26:03,945 - Model - INFO - The number of test data is: 48
+2024-04-27 22:26:08,122 - Model - INFO - ---- EVALUATION WHOLE SCENE----

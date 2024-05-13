@@ -138,6 +138,7 @@ def main(args):
                     torch_data = torch.Tensor(batch_data)
                     torch_data = torch_data.float().cuda()
                     torch_data = torch_data.transpose(2, 1)
+                    print(torch_data.shape)
                     seg_pred, _ = classifier(torch_data)
                     batch_pred_label = seg_pred.contiguous().cpu().data.max(2)[1].numpy()
 

@@ -1,0 +1,20 @@
+2024-05-05 17:02:18,926 - Model - INFO - PARAMETER ...
+2024-05-05 17:02:18,927 - Model - INFO - Namespace(batch_size=16, decay_rate=0.0001, epoch=256, gpu='0', learning_rate=0.001, log_dir=None, lr_decay=0.7, model='pointnet_sem_seg', npoint=4096, optimizer='Adam', step_size=10, test_area=5)
+2024-05-05 17:02:22,515 - Model - INFO - The number of training data is: 128
+2024-05-05 17:02:22,515 - Model - INFO - The number of test data is: 20
+2024-05-05 17:02:22,597 - Model - INFO - No existing model, starting training from scratch...
+2024-05-05 17:02:22,598 - Model - INFO - **** Epoch 1 (1/256) ****
+2024-05-05 17:02:22,598 - Model - INFO - Learning rate:0.001000
+2024-05-05 17:02:23,602 - Model - INFO - Training mean loss: 0.723608
+2024-05-05 17:02:23,602 - Model - INFO - Training accuracy: 0.586218
+2024-05-05 17:02:23,603 - Model - INFO - Save model...
+2024-05-05 17:02:23,603 - Model - INFO - Saving at log/sem_seg/2024-05-05_17-02/checkpoints/model.pth
+2024-05-05 17:02:23,647 - Model - INFO - Saving model....
+2024-05-05 17:02:23,648 - Model - INFO - ---- EPOCH 001 EVALUATION ----
+2024-05-05 17:02:55,122 - Model - INFO - PARAMETER ...
+2024-05-05 17:02:55,122 - Model - INFO - Namespace(batch_size=16, decay_rate=0.0001, epoch=256, gpu='0', learning_rate=0.001, log_dir=None, lr_decay=0.7, model='pointnet_sem_seg', npoint=4096, optimizer='Adam', step_size=10, test_area=5)
+2024-05-05 17:02:58,650 - Model - INFO - The number of training data is: 128
+2024-05-05 17:02:58,650 - Model - INFO - The number of test data is: 20
+2024-05-05 17:02:58,730 - Model - INFO - No existing model, starting training from scratch...
+2024-05-05 17:02:58,730 - Model - INFO - **** Epoch 1 (1/256) ****
+2024-05-05 17:02:58,730 - Model - INFO - Learning rate:0.001000

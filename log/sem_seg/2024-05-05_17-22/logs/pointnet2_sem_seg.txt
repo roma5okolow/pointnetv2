@@ -1,0 +1,32 @@
+2024-05-05 17:22:49,693 - Model - INFO - PARAMETER ...
+2024-05-05 17:22:49,693 - Model - INFO - Namespace(batch_size=16, decay_rate=0.0001, epoch=256, gpu='0', learning_rate=0.001, log_dir=None, lr_decay=0.7, model='pointnet2_sem_seg', npoint=4096, optimizer='Adam', step_size=10, test_area=5)
+2024-05-05 17:22:53,252 - Model - INFO - The number of training data is: 128
+2024-05-05 17:22:53,252 - Model - INFO - The number of test data is: 20
+2024-05-05 17:22:53,321 - Model - INFO - No existing model, starting training from scratch...
+2024-05-05 17:22:53,322 - Model - INFO - **** Epoch 1 (1/256) ****
+2024-05-05 17:22:53,322 - Model - INFO - Learning rate:0.001000
+2024-05-05 17:22:56,715 - Model - INFO - Training mean loss: 0.633166
+2024-05-05 17:22:56,716 - Model - INFO - Training accuracy: 0.739780
+2024-05-05 17:22:56,716 - Model - INFO - Save model...
+2024-05-05 17:22:56,716 - Model - INFO - Saving at log/sem_seg/2024-05-05_17-22/checkpoints/model.pth
+2024-05-05 17:22:56,740 - Model - INFO - Saving model....
+2024-05-05 17:22:56,741 - Model - INFO - ---- EPOCH 001 EVALUATION ----
+2024-05-05 17:22:57,451 - Model - INFO - eval mean loss: 0.495394
+2024-05-05 17:22:57,452 - Model - INFO - eval point avg class IoU: 0.455162
+2024-05-05 17:22:57,452 - Model - INFO - eval point accuracy: 0.910324
+2024-05-05 17:22:57,452 - Model - INFO - eval point avg class acc: 0.500000
+2024-05-05 17:22:57,453 - Model - INFO - ------- IoU --------
+class background     weight: 0.090, IoU: 0.910 
+class robot          weight: 0.910, IoU: 0.000 
+
+2024-05-05 17:22:57,453 - Model - INFO - Eval mean loss: 0.495394
+2024-05-05 17:22:57,453 - Model - INFO - Eval accuracy: 0.910324
+2024-05-05 17:22:57,453 - Model - INFO - Save model...
+2024-05-05 17:22:57,453 - Model - INFO - Saving at log/sem_seg/2024-05-05_17-22/checkpoints/best_model.pth
+2024-05-05 17:22:57,492 - Model - INFO - Saving model....
+2024-05-05 17:22:57,492 - Model - INFO - Best mIoU: 0.455162
+2024-05-05 17:22:57,492 - Model - INFO - **** Epoch 2 (2/256) ****
+2024-05-05 17:22:57,492 - Model - INFO - Learning rate:0.001000
+2024-05-05 17:23:00,652 - Model - INFO - Training mean loss: 0.562931
+2024-05-05 17:23:00,652 - Model - INFO - Training accuracy: 0.852364
+2024-05-05 17:23:00,653 - Model - INFO - ---- EPOCH 002 EVALUATION ----
